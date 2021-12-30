@@ -13,8 +13,8 @@ colour ray_colour(const ray& r, const hittable& world, int depth) {
 	if(depth <= 0)
 		return colour(0, 0, 0);
 
-	if(world.hit(r, 0, infinity, rec)){
-		point3 target = rec.p + rec.normal + random_in_unit_sphere();
+	if(world.hit(r, 0.001, infinity, rec)){
+		point3 target = rec.p + rec.normal + random_unit_vector();
 		return 0.5 * ray_colour(ray(rec.p, target - rec.p), world, depth-1);
 	}
 	vec3 unit_direction = unit_vector(r.direction());
